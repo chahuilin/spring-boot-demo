@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhexinit.taobaocrbt.mapper.xingbook_user.ZSuberVipMapper">
+  <resultMap id="BaseResultMap" type="com.zhexinit.taobaocrbt.entity.ZSuberVip">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="suber_id" jdbcType="VARCHAR" property="suberId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="mdn" jdbcType="VARCHAR" property="mdn" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="gender" jdbcType="BIT" property="gender" />
+    <result column="child_nick_name" jdbcType="VARCHAR" property="childNickName" />
+    <result column="child_gender" jdbcType="BIT" property="childGender" />
+    <result column="child_birthday" jdbcType="DATE" property="childBirthday" />
+    <result column="channel_code" jdbcType="VARCHAR" property="channelCode" />
+    <result column="vip_type" jdbcType="INTEGER" property="vipType" />
+    <result column="vip_expiry_time" jdbcType="TIMESTAMP" property="vipExpiryTime" />
+    <result column="suber_type" jdbcType="VARCHAR" property="suberType" />
+    <result column="token_id" jdbcType="VARCHAR" property="tokenId" />
+    <result column="login_flag" jdbcType="BIT" property="loginFlag" />
+    <result column="is_black" jdbcType="BIT" property="isBlack" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="last_imei" jdbcType="VARCHAR" property="lastImei" />
+    <result column="last_active_time" jdbcType="TIMESTAMP" property="lastActiveTime" />
+    <result column="cost_price" jdbcType="INTEGER" property="costPrice" />
+    <result column="dist_id" jdbcType="VARCHAR" property="distId" />
+    <result column="register_type" jdbcType="VARCHAR" property="registerType" />
+    <result column="register_province" jdbcType="VARCHAR" property="registerProvince" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, suber_id, nick_name, mdn, password, icon, gender, child_nick_name, child_gender, 
+    child_birthday, channel_code, vip_type, vip_expiry_time, suber_type, token_id, login_flag, 
+    is_black, create_time, modify_time, delete_flag, last_imei, last_active_time, cost_price, 
+    dist_id, register_type, register_province
+  </sql>
+  <select id="selectByExample" parameterType="com.zhexinit.taobaocrbt.entity.ZSuberVipExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from z_suber_vip
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from z_suber_vip
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from z_suber_vip
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhexinit.taobaocrbt.entity.ZSuberVipExample">
+    delete from z_suber_vip
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhexinit.taobaocrbt.entity.ZSuberVip">
+    insert into z_suber_vip (id, suber_id, nick_name, 
+      mdn, password, icon, 
+      gender, child_nick_name, child_gender, 
+      child_birthday, channel_code, vip_type, 
+      vip_expiry_time, suber_type, token_id, 
+      login_flag, is_black, create_time, 
+      modify_time, delete_flag, last_imei, 
+      last_active_time, cost_price, dist_id, 
+      register_type, register_province)
+    values (#{id,jdbcType=INTEGER}, #{suberId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{mdn,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=BIT}, #{childNickName,jdbcType=VARCHAR}, #{childGender,jdbcType=BIT}, 
+      #{childBirthday,jdbcType=DATE}, #{channelCode,jdbcType=VARCHAR}, #{vipType,jdbcType=INTEGER}, 
+      #{vipExpiryTime,jdbcType=TIMESTAMP}, #{suberType,jdbcType=VARCHAR}, #{tokenId,jdbcType=VARCHAR}, 
+      #{loginFlag,jdbcType=BIT}, #{isBlack,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=BIT}, #{lastImei,jdbcType=VARCHAR}, 
+      #{lastActiveTime,jdbcType=TIMESTAMP}, #{costPrice,jdbcType=INTEGER}, #{distId,jdbcType=VARCHAR}, 
+      #{registerType,jdbcType=VARCHAR}, #{registerProvince,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhexinit.taobaocrbt.entity.ZSuberVip">
+    insert into z_suber_vip
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="suberId != null">
+        suber_id,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="mdn != null">
+        mdn,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="childNickName != null">
+        child_nick_name,
+      </if>
+      <if test="childGender != null">
+        child_gender,
+      </if>
+      <if test="childBirthday != null">
+        child_birthday,
+      </if>
+      <if test="channelCode != null">
+        channel_code,
+      </if>
+      <if test="vipType != null">
+        vip_type,
+      </if>
+      <if test="vipExpiryTime != null">
+        vip_expiry_time,
+      </if>
+      <if test="suberType != null">
+        suber_type,
+      </if>
+      <if test="tokenId != null">
+        token_id,
+      </if>
+      <if test="loginFlag != null">
+        login_flag,
+      </if>
+      <if test="isBlack != null">
+        is_black,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag,
+      </if>
+      <if test="lastImei != null">
+        last_imei,
+      </if>
+      <if test="lastActiveTime != null">
+        last_active_time,
+      </if>
+      <if test="costPrice != null">
+        cost_price,
+      </if>
+      <if test="distId != null">
+        dist_id,
+      </if>
+      <if test="registerType != null">
+        register_type,
+      </if>
+      <if test="registerProvince != null">
+        register_province,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="suberId != null">
+        #{suberId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="mdn != null">
+        #{mdn,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=BIT},
+      </if>
+      <if test="childNickName != null">
+        #{childNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="childGender != null">
+        #{childGender,jdbcType=BIT},
+      </if>
+      <if test="childBirthday != null">
+        #{childBirthday,jdbcType=DATE},
+      </if>
+      <if test="channelCode != null">
+        #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vipType != null">
+        #{vipType,jdbcType=INTEGER},
+      </if>
+      <if test="vipExpiryTime != null">
+        #{vipExpiryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suberType != null">
+        #{suberType,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenId != null">
+        #{tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginFlag != null">
+        #{loginFlag,jdbcType=BIT},
+      </if>
+      <if test="isBlack != null">
+        #{isBlack,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        #{deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="lastImei != null">
+        #{lastImei,jdbcType=VARCHAR},
+      </if>
+      <if test="lastActiveTime != null">
+        #{lastActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costPrice != null">
+        #{costPrice,jdbcType=INTEGER},
+      </if>
+      <if test="distId != null">
+        #{distId,jdbcType=VARCHAR},
+      </if>
+      <if test="registerType != null">
+        #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="registerProvince != null">
+        #{registerProvince,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhexinit.taobaocrbt.entity.ZSuberVipExample" resultType="java.lang.Long">
+    select count(*) from z_suber_vip
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update z_suber_vip
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.suberId != null">
+        suber_id = #{record.suberId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null">
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mdn != null">
+        mdn = #{record.mdn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=BIT},
+      </if>
+      <if test="record.childNickName != null">
+        child_nick_name = #{record.childNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.childGender != null">
+        child_gender = #{record.childGender,jdbcType=BIT},
+      </if>
+      <if test="record.childBirthday != null">
+        child_birthday = #{record.childBirthday,jdbcType=DATE},
+      </if>
+      <if test="record.channelCode != null">
+        channel_code = #{record.channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vipType != null">
+        vip_type = #{record.vipType,jdbcType=INTEGER},
+      </if>
+      <if test="record.vipExpiryTime != null">
+        vip_expiry_time = #{record.vipExpiryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.suberType != null">
+        suber_type = #{record.suberType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tokenId != null">
+        token_id = #{record.tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginFlag != null">
+        login_flag = #{record.loginFlag,jdbcType=BIT},
+      </if>
+      <if test="record.isBlack != null">
+        is_black = #{record.isBlack,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteFlag != null">
+        delete_flag = #{record.deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="record.lastImei != null">
+        last_imei = #{record.lastImei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastActiveTime != null">
+        last_active_time = #{record.lastActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.costPrice != null">
+        cost_price = #{record.costPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.distId != null">
+        dist_id = #{record.distId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerType != null">
+        register_type = #{record.registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerProvince != null">
+        register_province = #{record.registerProvince,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update z_suber_vip
+    set id = #{record.id,jdbcType=INTEGER},
+      suber_id = #{record.suberId,jdbcType=VARCHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
+      mdn = #{record.mdn,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=BIT},
+      child_nick_name = #{record.childNickName,jdbcType=VARCHAR},
+      child_gender = #{record.childGender,jdbcType=BIT},
+      child_birthday = #{record.childBirthday,jdbcType=DATE},
+      channel_code = #{record.channelCode,jdbcType=VARCHAR},
+      vip_type = #{record.vipType,jdbcType=INTEGER},
+      vip_expiry_time = #{record.vipExpiryTime,jdbcType=TIMESTAMP},
+      suber_type = #{record.suberType,jdbcType=VARCHAR},
+      token_id = #{record.tokenId,jdbcType=VARCHAR},
+      login_flag = #{record.loginFlag,jdbcType=BIT},
+      is_black = #{record.isBlack,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      delete_flag = #{record.deleteFlag,jdbcType=BIT},
+      last_imei = #{record.lastImei,jdbcType=VARCHAR},
+      last_active_time = #{record.lastActiveTime,jdbcType=TIMESTAMP},
+      cost_price = #{record.costPrice,jdbcType=INTEGER},
+      dist_id = #{record.distId,jdbcType=VARCHAR},
+      register_type = #{record.registerType,jdbcType=VARCHAR},
+      register_province = #{record.registerProvince,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhexinit.taobaocrbt.entity.ZSuberVip">
+    update z_suber_vip
+    <set>
+      <if test="suberId != null">
+        suber_id = #{suberId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="mdn != null">
+        mdn = #{mdn,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BIT},
+      </if>
+      <if test="childNickName != null">
+        child_nick_name = #{childNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="childGender != null">
+        child_gender = #{childGender,jdbcType=BIT},
+      </if>
+      <if test="childBirthday != null">
+        child_birthday = #{childBirthday,jdbcType=DATE},
+      </if>
+      <if test="channelCode != null">
+        channel_code = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vipType != null">
+        vip_type = #{vipType,jdbcType=INTEGER},
+      </if>
+      <if test="vipExpiryTime != null">
+        vip_expiry_time = #{vipExpiryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suberType != null">
+        suber_type = #{suberType,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenId != null">
+        token_id = #{tokenId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginFlag != null">
+        login_flag = #{loginFlag,jdbcType=BIT},
+      </if>
+      <if test="isBlack != null">
+        is_black = #{isBlack,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null">
+        delete_flag = #{deleteFlag,jdbcType=BIT},
+      </if>
+      <if test="lastImei != null">
+        last_imei = #{lastImei,jdbcType=VARCHAR},
+      </if>
+      <if test="lastActiveTime != null">
+        last_active_time = #{lastActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costPrice != null">
+        cost_price = #{costPrice,jdbcType=INTEGER},
+      </if>
+      <if test="distId != null">
+        dist_id = #{distId,jdbcType=VARCHAR},
+      </if>
+      <if test="registerType != null">
+        register_type = #{registerType,jdbcType=VARCHAR},
+      </if>
+      <if test="registerProvince != null">
+        register_province = #{registerProvince,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhexinit.taobaocrbt.entity.ZSuberVip">
+    update z_suber_vip
+    set suber_id = #{suberId,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      mdn = #{mdn,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      child_nick_name = #{childNickName,jdbcType=VARCHAR},
+      child_gender = #{childGender,jdbcType=BIT},
+      child_birthday = #{childBirthday,jdbcType=DATE},
+      channel_code = #{channelCode,jdbcType=VARCHAR},
+      vip_type = #{vipType,jdbcType=INTEGER},
+      vip_expiry_time = #{vipExpiryTime,jdbcType=TIMESTAMP},
+      suber_type = #{suberType,jdbcType=VARCHAR},
+      token_id = #{tokenId,jdbcType=VARCHAR},
+      login_flag = #{loginFlag,jdbcType=BIT},
+      is_black = #{isBlack,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=BIT},
+      last_imei = #{lastImei,jdbcType=VARCHAR},
+      last_active_time = #{lastActiveTime,jdbcType=TIMESTAMP},
+      cost_price = #{costPrice,jdbcType=INTEGER},
+      dist_id = #{distId,jdbcType=VARCHAR},
+      register_type = #{registerType,jdbcType=VARCHAR},
+      register_province = #{registerProvince,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
