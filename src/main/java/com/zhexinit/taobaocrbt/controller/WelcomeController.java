@@ -6,24 +6,23 @@ import com.zhexinit.taobaocrbt.entity.ZSuberVip;
 import com.zhexinit.taobaocrbt.mapper.xingbook.ZSpeakerMapper;
 import com.zhexinit.taobaocrbt.mapper.xingbook_user.ZSuberVipMapper;
 import com.zhexinit.taobaocrbt.service.ZSpeakerService;
+import lombok.extern.log4j.Log4j2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
 /**
  * @author 12652
  */
-@Controller
-@RequestMapping("test")
-public class WelcomeController extends BaseController {
+@RestController
+@Log4j2
+public class WelcomeController {
     private static Logger logger = LoggerFactory.getLogger(WelcomeController.class);
 
     @Value("${application.message}")
@@ -37,7 +36,6 @@ public class WelcomeController extends BaseController {
 
     private final StringRedisTemplate template;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     public WelcomeController(ZSpeakerMapper zSpeakerMapper, ZSuberVipMapper zSuberVipMapper, ZSpeakerService zSpeakerService, StringRedisTemplate template) {
         this.zSpeakerMapper = zSpeakerMapper;
@@ -46,8 +44,7 @@ public class WelcomeController extends BaseController {
         this.template = template;
     }
 
-    @GetMapping("/")
-    @ResponseBody
+    @GetMapping
     public ZSuberVip welcome(Integer id) {
         logger.debug("application.message:{}", message);
 
@@ -62,7 +59,6 @@ public class WelcomeController extends BaseController {
     }
 
     @GetMapping("/testCache")
-    @ResponseBody
     public ZSpeaker testCache(Integer id) {
         ZSpeaker zSpeaker = zSpeakerService.selectByPrimaryKey(id);
         logger.debug("-------{}", zSpeaker);
@@ -70,7 +66,6 @@ public class WelcomeController extends BaseController {
     }
 
     @GetMapping("/cacheEvict")
-    @ResponseBody
     public String cacheEvict(Integer id) {
         zSpeakerService.asyc();
         zSpeakerService.cacheEvict(id);
@@ -78,7 +73,6 @@ public class WelcomeController extends BaseController {
     }
 
     @GetMapping("/testredis")
-    @ResponseBody
     public String testredis() {
         ValueOperations<String, String> ops = this.template.opsForValue();
         String key = "spring.boot.redis.test";

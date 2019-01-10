@@ -1,14 +1,14 @@
 server:
-  port: 8000
+  port: 8080
 
 application:
   message: 这是开发环境
 
 logging:
-  path: D:\\idea_workspace\\zxott
   level:
     root: INFO
     com.zhexinit.taobaocrbt: debug
+  file: log/spring-boot-demo.log
 
 spring:
   datasource:
