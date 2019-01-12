@@ -43,7 +43,7 @@ public class XingbookDataSourceConfig {
     @Bean(name = "xingbookSqlSessionTemplate")
     @Primary
     public SqlSessionTemplate testSqlSessionTemplate(
-            @Qualifier("xingbookSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+            @Qualifier("xingbookSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
